@@ -182,13 +182,13 @@ bool write_flow(int fd, struct flow_metadata *f, unsigned int sleep_overhead_us)
         return false;
     }
 
-    /* use min_write_buf with rate limiting */
+    /* use min_write_buf with rate limiting, 64KB */
     if (f->rate > 0)
     {
         write_buf = min_write_buf;
         max_per_write = TG_MIN_WRITE;
     }
-    /* use max_write_buf w/o rate limiting */
+    /* use max_write_buf w/o rate limiting - 1MB */
     else
     {
         write_buf = max_write_buf;
